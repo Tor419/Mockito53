@@ -90,4 +90,64 @@ class MoviesManagerTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    /*Доработка Д.З
+    Протестированы случаи для метода получения последних фильмов:
+     когда в менеджере фильмов меньше чем лимит
+     когда больше и
+     когда столько же.
+     */
+    @Test
+    public void FilmsLessThanTheLimitTest() {
+        MoviesManager manager = new MoviesManager(15);
+
+        manager.add("Film I");
+        manager.add("Film II");
+        manager.add("Film III");
+        manager.add("Film IV");
+        manager.add("Film V");
+
+        manager.findLast();
+
+        String[] expected = {"Film V", "Film IV", "Film III", "Film II", "Film I"};
+        String[] actual = manager.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void MoreFilmsThanLimitTest() {
+        MoviesManager manager = new MoviesManager(3);
+
+        manager.add("Film I");
+        manager.add("Film II");
+        manager.add("Film III");
+        manager.add("Film IV");
+        manager.add("Film V");
+
+        manager.findLast();
+
+        String[] expected = {"Film V", "Film IV", "Film III"};
+        String[] actual = manager.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void FilmsAsManyAsLimitTest() {
+        MoviesManager manager = new MoviesManager(5);
+
+        manager.add("Film I");
+        manager.add("Film II");
+        manager.add("Film III");
+        manager.add("Film IV");
+        manager.add("Film V");
+
+        manager.findLast();
+
+        String[] expected = {"Film V", "Film IV", "Film III", "Film II", "Film I"};
+        String[] actual = manager.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
